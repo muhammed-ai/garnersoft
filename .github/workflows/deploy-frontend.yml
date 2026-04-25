@@ -1,11 +1,7 @@
 name: Deploy Frontend to S3
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "frontend/**"
+  workflow_dispatch:
 
 permissions:
   id-token: write
