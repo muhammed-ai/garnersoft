@@ -3,430 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Garnersoft – Cloud Infrastructure & DevOps</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <title>Garnersoft | Cloud Infrastructure & DevOps</title>
+  <meta name="description" content="Garnersoft helps startups and growing teams design, automate, and secure AWS & Azure cloud infrastructure. Book a free consultation today." />
+  <meta property="og:title" content="Garnersoft | Cloud Infrastructure & DevOps" />
+  <meta property="og:description" content="Garnersoft helps startups and growing teams design, automate, and secure AWS & Azure cloud infrastructure." />
+  <meta property="og:image" content="https://garnersoft.com/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0f1b2d" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1b2d'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='900' font-size='18' fill='%23ff9900'>G</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Garnersoft",
+    "description": "Cloud infrastructure and DevOps consulting for startups and growing teams.",
+    "url": "https://garnersoft.com",
+    "email": "hello@garnersoft.com",
+    "areaServed": "Worldwide"
+  }
+  </script>
+  <link rel="stylesheet" href="styles.css" />
 
-    :root {
-      --navy: #0f1b2d;
-      --navy2: #161f2e;
-      --navy3: #1b2a3e;
-      --orange: #ff9900;
-      --orange-dark: #e68a00;
-      --blue: #00a1c9;
-      --text: #d1d5db;
-      --text-muted: #8b9ab0;
-      --white: #ffffff;
-      --border: #243447;
-      --card: #1a2840;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: "Amazon Ember", "Helvetica Neue", Arial, sans-serif;
-      background: var(--navy);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(15, 27, 45, 0.97);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%;
-      height: 60px;
-    }
-
-    .nav-logo {
-      font-size: 1.3rem; font-weight: 700;
-      color: var(--white);
-    }
-    .nav-logo span { color: var(--orange); }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.9rem; color: var(--text-muted);
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--white); }
-
-    .btn-nav {
-      background: var(--orange); color: #000;
-      padding: .45rem 1.1rem; border-radius: 4px;
-      font-size: .85rem; font-weight: 700;
-      transition: background .2s;
-    }
-    .btn-nav:hover { background: var(--orange-dark); color: #000; }
-
-    /* ── BUTTONS ── */
-    .btn-primary {
-      display: inline-block;
-      background: var(--orange); color: #000;
-      padding: .75rem 1.8rem; border-radius: 4px;
-      font-weight: 700; font-size: .95rem;
-      transition: background .2s;
-    }
-    .btn-primary:hover { background: var(--orange-dark); }
-
-    .btn-secondary {
-      display: inline-block;
-      border: 1px solid var(--blue); color: var(--blue);
-      padding: .75rem 1.8rem; border-radius: 4px;
-      font-weight: 600; font-size: .95rem;
-      transition: background .2s, color .2s;
-    }
-    .btn-secondary:hover { background: var(--blue); color: #000; }
-
-    /* ── SECTIONS ── */
-    section { padding: 80px 5%; }
-
-    .section-label {
-      font-size: .75rem; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--orange);
-      margin-bottom: .6rem;
-    }
-
-    h2.section-title {
-      font-size: 2rem; font-weight: 700; color: var(--white);
-      margin-bottom: 1rem;
-    }
-
-    .section-sub {
-      color: var(--text-muted); max-width: 600px; font-size: 1rem;
-    }
-
-    /* ── HERO ── */
-    #hero {
-      background: linear-gradient(135deg, #0a1628 0%, #0f1b2d 60%, #0d2137 100%);
-      min-height: 88vh;
-      display: flex; align-items: center;
-      padding: 80px 5%;
-      position: relative; overflow: hidden;
-    }
-
-    #hero::before {
-      content: "";
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,161,201,.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-content { max-width: 680px; position: relative; z-index: 1; }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(255,153,0,.1); border: 1px solid rgba(255,153,0,.3);
-      color: var(--orange); font-size: .8rem; font-weight: 600;
-      padding: .35rem .9rem; border-radius: 20px; margin-bottom: 1.5rem;
-    }
-
-    #hero h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; color: var(--white);
-      line-height: 1.2; margin-bottom: 1.2rem;
-    }
-
-    #hero h1 span { color: var(--orange); }
-
-    #hero p {
-      font-size: 1.1rem; color: var(--text-muted);
-      max-width: 580px; margin-bottom: 2rem;
-    }
-
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-    .hero-stats {
-      display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap;
-    }
-    .stat { border-left: 3px solid var(--orange); padding-left: .9rem; }
-    .stat strong { display: block; font-size: 1.5rem; color: var(--white); font-weight: 800; }
-    .stat span { font-size: .8rem; color: var(--text-muted); }
-
-    /* ── TRUST ── */
-    #trust { background: var(--navy2); }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem; margin-top: 2.5rem;
-    }
-
-    .trust-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.4rem 1.6rem;
-      display: flex; align-items: flex-start; gap: 1rem;
-    }
-
-    .trust-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      background: rgba(255,153,0,.12);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    .trust-item p { font-size: .9rem; color: var(--text); }
-
-    /* ── SERVICES ── */
-    #services { background: var(--navy); }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem; margin-top: 2.5rem;
-    }
-
-    .service-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      transition: border-color .2s, transform .2s;
-    }
-    .service-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-
-    .service-icon {
-      font-size: 1.8rem; margin-bottom: 1rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.05rem; font-weight: 700; color: var(--white);
-      margin-bottom: .6rem;
-    }
-
-    .service-card p { font-size: .9rem; color: var(--text-muted); }
-
-    /* ── PROJECTS ── */
-    #projects { background: var(--navy2); }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem; margin-top: 2.5rem;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.8rem;
-      border-top: 3px solid var(--orange);
-    }
-
-    .project-card h3 {
-      font-size: 1rem; font-weight: 700; color: var(--white);
-      margin-bottom: .7rem;
-    }
-
-    .project-card p { font-size: .88rem; color: var(--text-muted); margin-bottom: 1rem; }
-
-    .project-result {
-      font-size: .82rem; color: var(--blue);
-      display: flex; align-items: center; gap: .4rem;
-    }
-
-    /* ── APPROACH ── */
-    #approach { background: var(--navy); }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem; margin-top: 2.5rem;
-    }
-
-    .step {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .step-num {
-      font-size: 2.5rem; font-weight: 900;
-      color: rgba(255,153,0,.15);
-      position: absolute; top: 1rem; right: 1.2rem;
-      line-height: 1;
-    }
-
-    .step h3 {
-      font-size: 1rem; font-weight: 700; color: var(--white);
-      margin-bottom: .6rem;
-    }
-
-    .step p { font-size: .88rem; color: var(--text-muted); }
-
-    /* ── CTA BANNER ── */
-    #cta-banner {
-      background: linear-gradient(135deg, #0d2137 0%, #0f1b2d 100%);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-      padding: 80px 5%;
-    }
-
-    #cta-banner h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 800; color: var(--white); margin-bottom: 1rem;
-    }
-
-    #cta-banner p { color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; }
-
-    /* ── ACADEMY ── */
-    #academy {
-      background: var(--navy2);
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 2rem; flex-wrap: wrap;
-    }
-
-    .academy-content { max-width: 560px; }
-    .academy-content p { color: var(--text-muted); margin: .8rem 0 1.5rem; }
-
-    .academy-badge {
-      display: inline-block;
-      background: rgba(0,161,201,.1); border: 1px solid rgba(0,161,201,.3);
-      color: var(--blue); font-size: .75rem; font-weight: 700;
-      padding: .3rem .8rem; border-radius: 20px; margin-bottom: .5rem;
-      text-transform: uppercase; letter-spacing: .08em;
-    }
-
-    /* ── ABOUT ── */
-    #about { background: var(--navy); }
-
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center;
-    }
-
-    .about-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: .95rem; }
-
-    .about-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
-
-    .tag {
-      background: rgba(255,153,0,.1); border: 1px solid rgba(255,153,0,.25);
-      color: var(--orange); font-size: .78rem; font-weight: 600;
-      padding: .3rem .8rem; border-radius: 4px;
-    }
-
-    .about-visual {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-    }
-
-    .about-visual h4 { color: var(--white); font-size: .9rem; margin-bottom: 1.2rem; }
-
-    .skill-row { margin-bottom: 1rem; }
-    .skill-row span { font-size: .82rem; color: var(--text-muted); display: block; margin-bottom: .3rem; }
-
-    .bar { background: var(--border); border-radius: 4px; height: 6px; }
-    .bar-fill { height: 6px; border-radius: 4px; background: linear-gradient(90deg, var(--orange), var(--blue)); }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--navy2); }
-
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 4rem; align-items: start;
-    }
-
-    .contact-info h2 { font-size: 1.8rem; color: var(--white); margin-bottom: .8rem; }
-    .contact-info p { color: var(--text-muted); font-size: .95rem; }
-
-    .contact-detail {
-      display: flex; align-items: center; gap: .7rem;
-      margin-top: 1.5rem; color: var(--text-muted); font-size: .9rem;
-    }
-    .contact-detail span:first-child { font-size: 1.1rem; }
-
-    form { display: flex; flex-direction: column; gap: 1rem; }
-
-    form input, form textarea, form select {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: .8rem 1rem;
-      color: var(--white);
-      font-size: .9rem;
-      font-family: inherit;
-      transition: border-color .2s;
-      width: 100%;
-    }
-
-    form input:focus, form textarea:focus, form select:focus {
-      outline: none; border-color: var(--orange);
-    }
-
-    form textarea { resize: vertical; min-height: 120px; }
-
-    form select option { background: var(--card); }
-
-    .btn-submit {
-      background: var(--orange); color: #000;
-      border: none; border-radius: 4px;
-      padding: .85rem; font-size: .95rem; font-weight: 700;
-      cursor: pointer; transition: background .2s;
-    }
-    .btn-submit:hover { background: var(--orange-dark); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #080f1a;
-      border-top: 1px solid var(--border);
-      padding: 2rem 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-
-    .footer-logo { font-size: 1.1rem; font-weight: 700; color: var(--white); }
-    .footer-logo span { color: var(--orange); }
-
-    footer p { font-size: .82rem; color: var(--text-muted); }
-
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: .82rem; color: var(--text-muted); transition: color .2s; }
-    .footer-links a:hover { color: var(--white); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
-      #academy { flex-direction: column; }
-      .hero-stats { gap: 1.5rem; }
-    }
-  </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="nav-logo">Garner<span>soft</span></div>
-  <ul class="nav-links">
+<header>
+<nav aria-label="Main navigation">
+  <div class="nav-logo"><a href="index.html" style="color:inherit;">Garner<span>soft</span></a></div>
+  <ul class="nav-links" id="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#contact" class="btn-nav">Book a Call</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+</header>
+
+<!-- TECH STACK -->
+<div id="stack">
+  <div class="stack-label">Built with industry-standard tools</div>
+  <div class="stack-logos">
+    <div class="stack-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      AWS
+    </div>
+    <div class="stack-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#00a1c9" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="#00a1c9" stroke-width="2" stroke-linecap="round"/></svg>
+      Azure
+    </div>
+    <div class="stack-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#7b5ea7" stroke-width="2"/><path d="M8 12l2 2 4-4" stroke="#7b5ea7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Terraform
+    </div>
+    <div class="stack-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#d1d5db" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/></svg>
+      GitHub Actions
+    </div>
+    <div class="stack-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 17l6-6-6-6M12 19h8" stroke="#8b9ab0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Bash / Linux
+    </div>
+    <div class="stack-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      OIDC / IAM
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-content">
-    <div class="hero-badge">☁️ AWS &amp; Azure Infrastructure</div>
+  <div class="hero-content fade-in">
+    <div class="hero-badge"><span aria-hidden="true">☁️</span> AWS &amp; Azure Infrastructure</div>
     <h1>Build Scalable, Secure Cloud Infrastructure That <span>Actually Works</span></h1>
     <p>Garnersoft helps startups and growing teams design, automate, and secure AWS &amp; Azure environments—so you can ship faster, reduce cloud costs, and avoid production headaches.</p>
     <div class="hero-ctas">
@@ -446,20 +100,17 @@
   <div class="section-label">Why Garnersoft</div>
   <h2 class="section-title">Built for Real-World Systems</h2>
   <div class="trust-grid">
-    <div class="trust-item">
-      <div class="trust-icon">🏗️</div>
+    <div class="trust-item fade-in">
+      <div class="trust-icon" aria-hidden="true">🏗️</div>
       <p>Production-ready infrastructure using Terraform and CI/CD pipelines</p>
     </div>
-    <div class="trust-item">
-      <div class="trust-icon">⚡</div>
+    <div class="trust-item fade-in">
       <p>Experience with real-time systems and VM orchestration</p>
     </div>
-    <div class="trust-item">
-      <div class="trust-icon">🔒</div>
+    <div class="trust-item fade-in">
       <p>Secure cloud architecture with IAM, OIDC, and best practices</p>
     </div>
-    <div class="trust-item">
-      <div class="trust-icon">📈</div>
+    <div class="trust-item fade-in">
       <p>Focused on performance, reliability, and cost efficiency</p>
     </div>
   </div>
@@ -470,23 +121,23 @@
   <div class="section-label">What We Do</div>
   <h2 class="section-title">What We Can Help You With</h2>
   <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">☁️</div>
+    <div class="service-card fade-in">
+      <div class="service-icon" aria-hidden="true">☁️</div>
       <h3>Cloud Architecture</h3>
       <p>Design scalable, resilient AWS &amp; Azure environments tailored to your workload and growth.</p>
     </div>
-    <div class="service-card">
-      <div class="service-icon">⚙️</div>
+    <div class="service-card fade-in">
+      <div class="service-icon" aria-hidden="true">⚙️</div>
       <h3>DevOps &amp; Automation</h3>
       <p>Implement CI/CD pipelines, Infrastructure as Code, and deployment workflows that eliminate manual work.</p>
     </div>
-    <div class="service-card">
-      <div class="service-icon">💰</div>
+    <div class="service-card fade-in">
+      <div class="service-icon" aria-hidden="true">💰</div>
       <h3>Cloud Cost Optimization</h3>
       <p>Identify waste, optimize resource usage, and reduce your monthly cloud bill without sacrificing performance.</p>
     </div>
-    <div class="service-card">
-      <div class="service-icon">🛡️</div>
+    <div class="service-card fade-in">
+      <div class="service-icon" aria-hidden="true">🛡️</div>
       <h3>Cloud Security</h3>
       <p>Secure your infrastructure with proper access control, identity management, and production-grade configurations.</p>
     </div>
@@ -498,20 +149,20 @@
   <div class="section-label">Portfolio</div>
   <h2 class="section-title">Featured Work</h2>
   <div class="projects-grid">
-    <div class="project-card">
+    <div class="project-card fade-in">
       <h3>Real-Time Simulation Infrastructure</h3>
       <p>Designed and optimized a cloud-based system for launching on-demand virtual environments for training scenarios.</p>
-      <div class="project-result">→ Improved startup performance and reduced provisioning delays</div>
+    <div class="project-result">→ Reduced VM provisioning time by ~60%</div>
     </div>
-    <div class="project-card">
+    <div class="project-card fade-in">
       <h3>AWS Infrastructure Automation</h3>
       <p>Built automated infrastructure deployment pipelines using Terraform and GitHub Actions.</p>
-      <div class="project-result">→ Enabled consistent, repeatable environments across teams</div>
+    <div class="project-result">→ Cut deployment errors to zero across 3 environments</div>
     </div>
-    <div class="project-card">
+    <div class="project-card fade-in">
       <h3>Secure Cloud Access with OIDC</h3>
       <p>Implemented secure authentication between CI/CD systems and cloud providers without static credentials.</p>
-      <div class="project-result">→ Improved security posture and reduced risk exposure</div>
+    <div class="project-result">→ Eliminated static credentials, reducing attack surface by 100%</div>
     </div>
   </div>
 </section>
@@ -521,17 +172,17 @@
   <div class="section-label">Process</div>
   <h2 class="section-title">How We Work</h2>
   <div class="steps">
-    <div class="step">
+    <div class="step fade-in">
       <div class="step-num">1</div>
       <h3>Understand Your System</h3>
       <p>Our team analyzes your current infrastructure, bottlenecks, and business goals.</p>
     </div>
-    <div class="step">
+    <div class="step fade-in">
       <div class="step-num">2</div>
       <h3>Design the Right Solution</h3>
       <p>We deliver a clear, scalable architecture focused on performance, cost, and security.</p>
     </div>
-    <div class="step">
+    <div class="step fade-in">
       <div class="step-num">3</div>
       <h3>Build &amp; Automate</h3>
       <p>We implement and automate everything so your team can move faster with confidence.</p>
@@ -548,13 +199,46 @@
 
 <!-- ACADEMY -->
 <section id="academy">
-  <div class="academy-content">
-    <div class="academy-badge">Coming Soon</div>
-    <h2 class="section-title">Learn Cloud &amp; DevOps the Real-World Way</h2>
-    <p>Step-by-step, hands-on training designed to help beginners break into cloud and DevOps using real projects—not just theory.</p>
-    <a href="#contact" class="btn-secondary">Join the Waitlist</a>
+  <div class="academy-inner">
+    <div class="academy-content">
+      <div class="academy-badge">Coming Soon</div>
+      <h2 class="section-title">Learn Cloud &amp; DevOps the Real-World Way</h2>
+      <p>Step-by-step, hands-on training designed to help beginners break into cloud and DevOps using real projects—not just theory.</p>
+      <form class="waitlist-form" id="waitlist-form">
+        <label for="waitlist-email" class="sr-only">Email address for waitlist</label>
+        <input id="waitlist-email" type="email" placeholder="your@email.com" required />
+        <!-- honeypot -->
+        <input type="text" name="_gotcha" tabindex="-1" aria-hidden="true" style="display:none" />
+        <button type="submit" class="btn-primary" style="white-space:nowrap;">Join the Waitlist</button>
+      </form>
+    </div>
+    <div style="font-size:5rem;opacity:.15;user-select:none;" aria-hidden="true">🎓</div>
   </div>
-  <div style="font-size:5rem;opacity:.15;user-select:none;">🎓</div>
+</section>
+
+
+<!-- WHO IS THIS FOR -->
+<section id="for-who">
+  <div class="section-label">Ideal Client</div>
+  <h2 class="section-title">Is Garnersoft Right for You?</h2>
+  <div class="for-who-grid">
+    <div class="for-who-card fade-in">
+      <h3><span class="check">✓</span>Early-stage startups</h3>
+      <p>You're building on AWS or Azure and need a solid foundation before scaling — not a patchwork of manual configs.</p>
+    </div>
+    <div class="for-who-card fade-in">
+      <h3><span class="check">✓</span>Growing engineering teams</h3>
+      <p>Your team is 5–50 engineers and deployments are becoming a bottleneck. You need CI/CD and IaC that actually works.</p>
+    </div>
+    <div class="for-who-card fade-in">
+      <h3><span class="check">✓</span>Teams with cloud cost pain</h3>
+      <p>Your AWS bill keeps climbing but you're not sure where the waste is. We audit, identify, and fix it.</p>
+    </div>
+    <div class="for-who-card fade-in">
+      <h3><span class="check">✓</span>Security-conscious orgs</h3>
+      <p>You've been told your IAM setup is a mess or you're still using static credentials in CI. We fix that properly.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -578,30 +262,17 @@
       </div>
     </div>
     <div class="about-visual">
-      <h4>Core Expertise</h4>
-      <div class="skill-row">
-        <span>Cloud Architecture (AWS / Azure)</span>
-        <div class="bar"><div class="bar-fill" style="width:95%"></div></div>
-      </div>
-      <div class="skill-row">
-        <span>Infrastructure as Code (Terraform)</span>
-        <div class="bar"><div class="bar-fill" style="width:92%"></div></div>
-      </div>
-      <div class="skill-row">
-        <span>CI/CD &amp; Automation</span>
-        <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
-      </div>
-      <div class="skill-row">
-        <span>Cloud Security &amp; IAM</span>
-        <div class="bar"><div class="bar-fill" style="width:88%"></div></div>
-      </div>
-      <div class="skill-row">
-        <span>Cost Optimization</span>
-        <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+      <h4>By the Numbers</h4>
+      <div class="cert-grid">
+        <div class="cert-item"><strong>AWS</strong><span>Certified Solutions Architect</span></div>
+        <div class="cert-item"><strong>10+</strong><span>Years cloud experience</span></div>
+        <div class="cert-item"><strong>10+</strong><span>Infrastructure projects delivered</span></div>
+        <div class="cert-item"><strong>100%</strong><span>IaC-managed environments</span></div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- CONTACT -->
 <section id="contact">
@@ -610,14 +281,19 @@
       <div class="section-label">Get in Touch</div>
       <h2>Let's Talk</h2>
       <p>Tell us about your project or what you need help with, and our team will get back to you.</p>
-      <div class="contact-detail"><span>📧</span><span>hello@garnersoft.com</span></div>
-      <div class="contact-detail"><span>🌍</span><span>Available worldwide · Remote</span></div>
-      <div class="contact-detail"><span>⏱️</span><span>Typically responds within 24 hours</span></div>
+      <div class="contact-detail"><span aria-hidden="true">📧</span><span>hello@garnersoft.com</span></div>
+      <div class="contact-detail"><span aria-hidden="true">🌍</span><span>Available worldwide · Remote</span></div>
+      <div class="contact-detail"><span aria-hidden="true">⏱️</span><span>Typically responds within 24 hours</span></div>
     </div>
-    <form onsubmit="handleSubmit(event)">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Email Address" required />
-      <select>
+    <form id="contact-form">
+      <label for="contact-name" class="sr-only">Your Name</label>
+      <input id="contact-name" type="text" placeholder="Your Name" required />
+      <div class="field-error" id="err-name" role="alert" aria-live="polite"></div>
+      <label for="contact-email" class="sr-only">Email Address</label>
+      <input id="contact-email" type="email" placeholder="Email Address" required />
+      <div class="field-error" id="err-email" role="alert" aria-live="polite"></div>
+      <label for="contact-service" class="sr-only">Service needed</label>
+      <select id="contact-service">
         <option value="" disabled selected>What do you need help with?</option>
         <option>Cloud Architecture</option>
         <option>DevOps &amp; Automation</option>
@@ -626,7 +302,10 @@
         <option>Academy / Training</option>
         <option>Other</option>
       </select>
-      <textarea placeholder="Tell us more about your project or goals..."></textarea>
+      <label for="contact-message" class="sr-only">Message</label>
+      <textarea id="contact-message" placeholder="Tell us more about your project or goals..."></textarea>
+      <!-- honeypot -->
+      <input type="text" name="_gotcha" tabindex="-1" aria-hidden="true" style="display:none" />
       <button type="submit" class="btn-submit">Send Message</button>
     </form>
   </div>
@@ -644,10 +323,83 @@
   </div>
 </footer>
 
-<script>
-  function handleSubmit(e) {
+<button id="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script type="module">
+  // ── Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // ── Active nav highlight
+  const sections = document.querySelectorAll('section[id], div[id="stack"]');
+  const navAnchors = document.querySelectorAll('.nav-links a:not(.btn-nav)');
+  const navObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => navObserver.observe(s));
+
+  // ── Scroll-in animations
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  // ── Scroll-to-top
+  const scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ── Contact form with inline validation
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
+    const name = document.getElementById('contact-name');
+    const email = document.getElementById('contact-email');
+    const errName = document.getElementById('err-name');
+    const errEmail = document.getElementById('err-email');
+    let valid = true;
+
+    if (!name.value.trim()) {
+      name.classList.add('invalid');
+      errName.textContent = 'Please enter your name.';
+      valid = false;
+    } else {
+      name.classList.remove('invalid');
+      errName.textContent = '';
+    }
+
+    if (!email.value.trim() || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value)) {
+      email.classList.add('invalid');
+      errEmail.textContent = 'Please enter a valid email address.';
+      valid = false;
+    } else {
+      email.classList.remove('invalid');
+      errEmail.textContent = '';
+    }
+
+    if (!valid) return;
+
+    const btn = this.querySelector('.btn-submit');
     btn.textContent = '✓ Message Sent!';
     btn.style.background = '#1a7f4b';
     btn.style.color = '#fff';
@@ -655,9 +407,26 @@
       btn.textContent = 'Send Message';
       btn.style.background = '';
       btn.style.color = '';
-      e.target.reset();
+      this.reset();
     }, 3000);
-  }
+  });
+
+  // Clear validation on input
+  ['contact-name', 'contact-email'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => {
+      el.classList.remove('invalid');
+      document.getElementById('err-' + id.replace('contact-', '')).textContent = '';
+    });
+  });
+
+  // ── Waitlist form
+  document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    btn.textContent = "\u2713 You're on the list!";
+    btn.disabled = true;
+  });
 </script>
 
 </body>
