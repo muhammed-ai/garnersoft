@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garnersoft – Cloud Infrastructure & DevOps</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1b2d;
+      --navy2: #161f2e;
+      --navy3: #1b2a3e;
+      --orange: #ff9900;
+      --orange-dark: #e68a00;
+      --blue: #00a1c9;
+      --text: #d1d5db;
+      --text-muted: #8b9ab0;
+      --white: #ffffff;
+      --border: #243447;
+      --card: #1a2840;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Amazon Ember", "Helvetica Neue", Arial, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15, 27, 45, 0.97);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem; color: var(--text-muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-nav {
+      background: var(--orange); color: #000;
+      padding: .45rem 1.1rem; border-radius: 4px;
+      font-size: .85rem; font-weight: 700;
+      transition: background .2s;
+    }
+    .btn-nav:hover { background: var(--orange-dark); color: #000; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--orange); color: #000;
+      padding: .75rem 1.8rem; border-radius: 4px;
+      font-weight: 700; font-size: .95rem;
+      transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--orange-dark); }
+
+    .btn-secondary {
+      display: inline-block;
+      border: 1px solid var(--blue); color: var(--blue);
+      padding: .75rem 1.8rem; border-radius: 4px;
+      font-weight: 600; font-size: .95rem;
+      transition: background .2s, color .2s;
+    }
+    .btn-secondary:hover { background: var(--blue); color: #000; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 5%; }
+
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: .6rem;
+    }
+
+    h2.section-title {
+      font-size: 2rem; font-weight: 700; color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--text-muted); max-width: 600px; font-size: 1rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: linear-gradient(135deg, #0a1628 0%, #0f1b2d 60%, #0d2137 100%);
+      min-height: 88vh;
+      display: flex; align-items: center;
+      padding: 80px 5%;
+      position: relative; overflow: hidden;
+    }
+
+    #hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,161,201,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 680px; position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,153,0,.1); border: 1px solid rgba(255,153,0,.3);
+      color: var(--orange); font-size: .8rem; font-weight: 600;
+      padding: .35rem .9rem; border-radius: 20px; margin-bottom: 1.5rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.2; margin-bottom: 1.2rem;
+    }
+
+    #hero h1 span { color: var(--orange); }
+
+    #hero p {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 580px; margin-bottom: 2rem;
+    }
+
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap;
+    }
+    .stat { border-left: 3px solid var(--orange); padding-left: .9rem; }
+    .stat strong { display: block; font-size: 1.5rem; color: var(--white); font-weight: 800; }
+    .stat span { font-size: .8rem; color: var(--text-muted); }
+
+    /* ── TRUST ── */
+    #trust { background: var(--navy2); }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+
+    .trust-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+
+    .trust-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(255,153,0,.12);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .trust-item p { font-size: .9rem; color: var(--text); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--navy); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .service-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+
+    .service-icon {
+      font-size: 1.8rem; margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--white);
+      margin-bottom: .6rem;
+    }
+
+    .service-card p { font-size: .9rem; color: var(--text-muted); }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--navy2); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.8rem;
+      border-top: 3px solid var(--orange);
+    }
+
+    .project-card h3 {
+      font-size: 1rem; font-weight: 700; color: var(--white);
+      margin-bottom: .7rem;
+    }
+
+    .project-card p { font-size: .88rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+    .project-result {
+      font-size: .82rem; color: var(--blue);
+      display: flex; align-items: center; gap: .4rem;
+    }
+
+    /* ── APPROACH ── */
+    #approach { background: var(--navy); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .step-num {
+      font-size: 2.5rem; font-weight: 900;
+      color: rgba(255,153,0,.15);
+      position: absolute; top: 1rem; right: 1.2rem;
+      line-height: 1;
+    }
+
+    .step h3 {
+      font-size: 1rem; font-weight: 700; color: var(--white);
+      margin-bottom: .6rem;
+    }
+
+    .step p { font-size: .88rem; color: var(--text-muted); }
+
+    /* ── CTA BANNER ── */
+    #cta-banner {
+      background: linear-gradient(135deg, #0d2137 0%, #0f1b2d 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 80px 5%;
+    }
+
+    #cta-banner h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800; color: var(--white); margin-bottom: 1rem;
+    }
+
+    #cta-banner p { color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; }
+
+    /* ── ACADEMY ── */
+    #academy {
+      background: var(--navy2);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+
+    .academy-content { max-width: 560px; }
+    .academy-content p { color: var(--text-muted); margin: .8rem 0 1.5rem; }
+
+    .academy-badge {
+      display: inline-block;
+      background: rgba(0,161,201,.1); border: 1px solid rgba(0,161,201,.3);
+      color: var(--blue); font-size: .75rem; font-weight: 700;
+      padding: .3rem .8rem; border-radius: 20px; margin-bottom: .5rem;
+      text-transform: uppercase; letter-spacing: .08em;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--navy); }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+
+    .about-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: .95rem; }
+
+    .about-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+
+    .tag {
+      background: rgba(255,153,0,.1); border: 1px solid rgba(255,153,0,.25);
+      color: var(--orange); font-size: .78rem; font-weight: 600;
+      padding: .3rem .8rem; border-radius: 4px;
+    }
+
+    .about-visual {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .about-visual h4 { color: var(--white); font-size: .9rem; margin-bottom: 1.2rem; }
+
+    .skill-row { margin-bottom: 1rem; }
+    .skill-row span { font-size: .82rem; color: var(--text-muted); display: block; margin-bottom: .3rem; }
+
+    .bar { background: var(--border); border-radius: 4px; height: 6px; }
+    .bar-fill { height: 6px; border-radius: 4px; background: linear-gradient(90deg, var(--orange), var(--blue)); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy2); }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem; align-items: start;
+    }
+
+    .contact-info h2 { font-size: 1.8rem; color: var(--white); margin-bottom: .8rem; }
+    .contact-info p { color: var(--text-muted); font-size: .95rem; }
+
+    .contact-detail {
+      display: flex; align-items: center; gap: .7rem;
+      margin-top: 1.5rem; color: var(--text-muted); font-size: .9rem;
+    }
+    .contact-detail span:first-child { font-size: 1.1rem; }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+
+    form input, form textarea, form select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .8rem 1rem;
+      color: var(--white);
+      font-size: .9rem;
+      font-family: inherit;
+      transition: border-color .2s;
+      width: 100%;
+    }
+
+    form input:focus, form textarea:focus, form select:focus {
+      outline: none; border-color: var(--orange);
+    }
+
+    form textarea { resize: vertical; min-height: 120px; }
+
+    form select option { background: var(--card); }
+
+    .btn-submit {
+      background: var(--orange); color: #000;
+      border: none; border-radius: 4px;
+      padding: .85rem; font-size: .95rem; font-weight: 700;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-submit:hover { background: var(--orange-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f1a;
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-logo { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .footer-logo span { color: var(--orange); }
+
+    footer p { font-size: .82rem; color: var(--text-muted); }
+
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: .82rem; color: var(--text-muted); transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      #academy { flex-direction: column; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Garner<span>soft</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="btn-nav">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">☁️ AWS &amp; Azure Infrastructure</div>
+    <h1>Build Scalable, Secure Cloud Infrastructure That <span>Actually Works</span></h1>
+    <p>Garnersoft helps startups and growing teams design, automate, and secure AWS &amp; Azure environments—so you can ship faster, reduce cloud costs, and avoid production headaches.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+      <a href="#projects" class="btn-secondary">View Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>AWS &amp; Azure</strong><span>Multi-cloud expertise</span></div>
+      <div class="stat"><strong>IaC First</strong><span>Terraform &amp; CI/CD</span></div>
+      <div class="stat"><strong>Zero Static Creds</strong><span>OIDC-secured pipelines</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="section-label">Why Garnersoft</div>
+  <h2 class="section-title">Built for Real-World Systems</h2>
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">🏗️</div>
+      <p>Production-ready infrastructure using Terraform and CI/CD pipelines</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">⚡</div>
+      <p>Experience with real-time systems and VM orchestration</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔒</div>
+      <p>Secure cloud architecture with IAM, OIDC, and best practices</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">📈</div>
+      <p>Focused on performance, reliability, and cost efficiency</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">What We Can Help You With</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">☁️</div>
+      <h3>Cloud Architecture</h3>
+      <p>Design scalable, resilient AWS &amp; Azure environments tailored to your workload and growth.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙️</div>
+      <h3>DevOps &amp; Automation</h3>
+      <p>Implement CI/CD pipelines, Infrastructure as Code, and deployment workflows that eliminate manual work.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💰</div>
+      <h3>Cloud Cost Optimization</h3>
+      <p>Identify waste, optimize resource usage, and reduce your monthly cloud bill without sacrificing performance.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <h3>Cloud Security</h3>
+      <p>Secure your infrastructure with proper access control, identity management, and production-grade configurations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">Featured Work</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <h3>Real-Time Simulation Infrastructure</h3>
+      <p>Designed and optimized a cloud-based system for launching on-demand virtual environments for training scenarios.</p>
+      <div class="project-result">→ Improved startup performance and reduced provisioning delays</div>
+    </div>
+    <div class="project-card">
+      <h3>AWS Infrastructure Automation</h3>
+      <p>Built automated infrastructure deployment pipelines using Terraform and GitHub Actions.</p>
+      <div class="project-result">→ Enabled consistent, repeatable environments across teams</div>
+    </div>
+    <div class="project-card">
+      <h3>Secure Cloud Access with OIDC</h3>
+      <p>Implemented secure authentication between CI/CD systems and cloud providers without static credentials.</p>
+      <div class="project-result">→ Improved security posture and reduced risk exposure</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="section-label">Process</div>
+  <h2 class="section-title">How We Work</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Understand Your System</h3>
+      <p>Our team analyzes your current infrastructure, bottlenecks, and business goals.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Design the Right Solution</h3>
+      <p>We deliver a clear, scalable architecture focused on performance, cost, and security.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Build &amp; Automate</h3>
+      <p>We implement and automate everything so your team can move faster with confidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner">
+  <h2>Let's Build Your Cloud Infrastructure the Right Way</h2>
+  <p>Whether you need to optimize costs, improve performance, or secure your systems—Garnersoft can help you get there faster.</p>
+  <a href="#contact" class="btn-primary">Schedule a Free Call</a>
+</section>
+
+<!-- ACADEMY -->
+<section id="academy">
+  <div class="academy-content">
+    <div class="academy-badge">Coming Soon</div>
+    <h2 class="section-title">Learn Cloud &amp; DevOps the Real-World Way</h2>
+    <p>Step-by-step, hands-on training designed to help beginners break into cloud and DevOps using real projects—not just theory.</p>
+    <a href="#contact" class="btn-secondary">Join the Waitlist</a>
+  </div>
+  <div style="font-size:5rem;opacity:.15;user-select:none;">🎓</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-label">About</div>
+      <h2 class="section-title">About Garnersoft</h2>
+      <p>Garnersoft is a cloud infrastructure company focused on building modern, scalable, secure, and efficient systems for startups and growing teams.</p>
+      <p>With deep expertise across AWS and Azure, our work centers on real-world systems—automation, performance optimization, and production-ready architecture.</p>
+      <p>Our mission is straightforward: help organizations build better cloud systems and empower individuals to break into cloud the right way.</p>
+      <div class="about-tags">
+        <span class="tag">AWS</span>
+        <span class="tag">Azure</span>
+        <span class="tag">Terraform</span>
+        <span class="tag">GitHub Actions</span>
+        <span class="tag">OIDC</span>
+        <span class="tag">IAM</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">DevOps</span>
+      </div>
+    </div>
+    <div class="about-visual">
+      <h4>Core Expertise</h4>
+      <div class="skill-row">
+        <span>Cloud Architecture (AWS / Azure)</span>
+        <div class="bar"><div class="bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span>Infrastructure as Code (Terraform)</span>
+        <div class="bar"><div class="bar-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span>CI/CD &amp; Automation</span>
+        <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span>Cloud Security &amp; IAM</span>
+        <div class="bar"><div class="bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span>Cost Optimization</span>
+        <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">Get in Touch</div>
+      <h2>Let's Talk</h2>
+      <p>Tell us about your project or what you need help with, and our team will get back to you.</p>
+      <div class="contact-detail"><span>📧</span><span>hello@garnersoft.com</span></div>
+      <div class="contact-detail"><span>🌍</span><span>Available worldwide · Remote</span></div>
+      <div class="contact-detail"><span>⏱️</span><span>Typically responds within 24 hours</span></div>
+    </div>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <select>
+        <option value="" disabled selected>What do you need help with?</option>
+        <option>Cloud Architecture</option>
+        <option>DevOps &amp; Automation</option>
+        <option>Cloud Cost Optimization</option>
+        <option>Cloud Security</option>
+        <option>Academy / Training</option>
+        <option>Other</option>
+      </select>
+      <textarea placeholder="Tell us more about your project or goals..."></textarea>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Garner<span>soft</span></div>
+  <p>© 2025 Garnersoft. Building scalable cloud systems.</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#1a7f4b';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
