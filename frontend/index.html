@@ -88,9 +88,72 @@
       <a href="#projects" class="btn-secondary">View Our Work</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><strong>AWS &amp; Azure</strong><span>Multi-cloud expertise</span></div>
-      <div class="stat"><strong>IaC First</strong><span>Terraform &amp; CI/CD</span></div>
-      <div class="stat"><strong>Zero Static Creds</strong><span>OIDC-secured pipelines</span></div>
+      <div class="stat"><strong>AWS &amp; Azure</strong> <span>Multi-cloud expertise</span></div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat"><strong>IaC First</strong> <span>Terraform &amp; CI/CD</span></div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat"><strong>Zero Static Creds</strong> <span>OIDC-secured pipelines</span></div>
+    </div>
+  </div>
+
+  <!-- K8s Architecture Diagram -->
+  <div class="hero-diagram fade-in" aria-label="High-level Kubernetes architecture diagram" role="img">
+    <div class="k8s-diagram">
+
+      <!-- Cloud boundary -->
+      <div class="k8s-cloud-label">Cloud Provider (AWS / Azure)</div>
+
+      <!-- Cluster boundary -->
+      <div class="k8s-cluster">
+        <div class="k8s-cluster-label">Kubernetes Cluster</div>
+
+        <!-- Control Plane -->
+        <div class="k8s-plane">
+          <div class="k8s-plane-label">Control Plane</div>
+          <div class="k8s-plane-nodes">
+            <div class="k8s-component cp">API Server</div>
+            <div class="k8s-component cp">Scheduler</div>
+            <div class="k8s-component cp">etcd</div>
+            <div class="k8s-component cp">Controller</div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="k8s-arrow" aria-hidden="true">↕</div>
+
+        <!-- Worker Nodes -->
+        <div class="k8s-plane">
+          <div class="k8s-plane-label">Worker Nodes</div>
+          <div class="k8s-workers">
+            <div class="k8s-node">
+              <div class="k8s-node-label">Node 1</div>
+              <div class="k8s-pod">Pod</div>
+              <div class="k8s-pod">Pod</div>
+              <div class="k8s-node-agent">kubelet · kube-proxy</div>
+            </div>
+            <div class="k8s-node">
+              <div class="k8s-node-label">Node 2</div>
+              <div class="k8s-pod">Pod</div>
+              <div class="k8s-pod">Pod</div>
+              <div class="k8s-node-agent">kubelet · kube-proxy</div>
+            </div>
+            <div class="k8s-node">
+              <div class="k8s-node-label">Node 3</div>
+              <div class="k8s-pod">Pod</div>
+              <div class="k8s-pod">Pod</div>
+              <div class="k8s-node-agent">kubelet · kube-proxy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- External traffic -->
+      <div class="k8s-ingress">
+        <div class="k8s-component ingress">Ingress / Load Balancer</div>
+        <div class="k8s-arrow" aria-hidden="true">↑</div>
+        <div class="k8s-component ext">Internet Traffic</div>
+      </div>
+
     </div>
   </div>
 </section>
