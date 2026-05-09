@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://garnersoft.com/sitemap.xml
