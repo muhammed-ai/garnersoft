@@ -26,6 +26,9 @@ permissions:
   contents: read
   pull-requests: write
 
+env:
+  AWS_REGION: us-east-1
+
 jobs:
   terraform:
     name: Terraform
