@@ -552,9 +552,7 @@ h2.section-title {
 #contact { background: var(--navy); }
 
 .contact-inner {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 4rem; align-items: start;
+  max-width: 560px;
 }
 
 .contact-info h2 { font-size: 1.8rem; color: var(--white); margin-bottom: .8rem; }

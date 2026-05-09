@@ -353,35 +353,11 @@
     <div class="contact-info">
       <div class="section-label">Get in Touch</div>
       <h2>Let's Talk</h2>
-      <p>Tell us about your project or what you need help with, and our team will get back to you.</p>
-      <div class="contact-detail"><span aria-hidden="true">📧</span><span>info@garnersoft.com</span></div>
+      <p>Tell us about your project or what you need help with, and our team will get back to you directly.</p>
+      <div class="contact-detail"><span aria-hidden="true">📧</span><span><a href="mailto:info@garnersoft.com">info@garnersoft.com</a></span></div>
       <div class="contact-detail"><span aria-hidden="true">🌍</span><span>Available worldwide · Remote</span></div>
       <div class="contact-detail"><span aria-hidden="true">⏱️</span><span>Typically responds within 24 hours</span></div>
     </div>
-    <form id="contact-form">
-      <label for="contact-name" class="sr-only">Your Name</label>
-      <input id="contact-name" type="text" placeholder="Your Name" required />
-      <div class="field-error" id="err-name" role="alert" aria-live="polite"></div>
-      <label for="contact-email" class="sr-only">Email Address</label>
-      <input id="contact-email" type="email" placeholder="Email Address" required />
-      <div class="field-error" id="err-email" role="alert" aria-live="polite"></div>
-      <label for="contact-service" class="sr-only">Service needed</label>
-      <select id="contact-service">
-        <option value="" disabled selected>What do you need help with?</option>
-        <option>Cloud Architecture</option>
-        <option>DevOps &amp; Automation</option>
-        <option>Cloud Cost Optimization</option>
-        <option>Cloud Security</option>
-        <option>Site Reliability Engineering (SRE)</option>
-        <option>Academy / Training</option>
-        <option>Other</option>
-      </select>
-      <label for="contact-message" class="sr-only">Message</label>
-      <textarea id="contact-message" placeholder="Tell us more about your project or goals..."></textarea>
-      <!-- honeypot -->
-      <input type="text" name="_gotcha" tabindex="-1" aria-hidden="true" style="display:none" />
-      <button type="submit" class="btn-submit">Send Message</button>
-    </form>
   </div>
 </section>
 
@@ -443,56 +419,6 @@
     scrollBtn.classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
   scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  // ── Contact form with inline validation
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('contact-name');
-    const email = document.getElementById('contact-email');
-    const errName = document.getElementById('err-name');
-    const errEmail = document.getElementById('err-email');
-    let valid = true;
-
-    if (!name.value.trim()) {
-      name.classList.add('invalid');
-      errName.textContent = 'Please enter your name.';
-      valid = false;
-    } else {
-      name.classList.remove('invalid');
-      errName.textContent = '';
-    }
-
-    if (!email.value.trim() || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value)) {
-      email.classList.add('invalid');
-      errEmail.textContent = 'Please enter a valid email address.';
-      valid = false;
-    } else {
-      email.classList.remove('invalid');
-      errEmail.textContent = '';
-    }
-
-    if (!valid) return;
-
-    const btn = this.querySelector('.btn-submit');
-    btn.textContent = '✓ Message Sent!';
-    btn.style.background = '#1a7f4b';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-      btn.style.color = '';
-      this.reset();
-    }, 3000);
-  });
-
-  // Clear validation on input
-  ['contact-name', 'contact-email'].forEach(id => {
-    const el = document.getElementById(id);
-    el.addEventListener('input', () => {
-      el.classList.remove('invalid');
-      document.getElementById('err-' + id.replace('contact-', '')).textContent = '';
-    });
-  });
 
   // ── Waitlist form
   document.getElementById('waitlist-form').addEventListener('submit', function(e) {
