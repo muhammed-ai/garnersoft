@@ -55,8 +55,10 @@ resource "aws_s3_bucket_public_access_block" "website" {
 # This allows rollback to a previous deployment if a bad release is pushed.
 resource "aws_s3_bucket_versioning" "website" {
   bucket = aws_s3_bucket.website.id
-  versioning_configuration { status = "Enabled" }
-  tags   = local.common_tags
+  versioning_configuration {
+    status = "Enabled"
+  }
+  tags = local.common_tags
 }
 
 # Origin Access Control (OAC) is the AWS-recommended way to connect
@@ -116,7 +118,9 @@ resource "aws_acm_certificate" "website" {
 
   # create_before_destroy ensures zero-downtime certificate rotation —
   # the new cert is issued before the old one is destroyed.
-  lifecycle { create_before_destroy = true }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # ACM DNS validation requires CNAME records to be added to Route 53 so AWS
@@ -187,7 +191,9 @@ resource "aws_cloudfront_distribution" "website" {
 
     forwarded_values {
       query_string = false
-      cookies { forward = "none" }
+      cookies {
+        forward = "none"
+      }
     }
 
     min_ttl     = 0
@@ -207,7 +213,9 @@ resource "aws_cloudfront_distribution" "website" {
 
     forwarded_values {
       query_string = false
-      cookies { forward = "none" }
+      cookies {
+        forward = "none"
+      }
     }
 
     min_ttl     = 0
@@ -232,7 +240,9 @@ resource "aws_cloudfront_distribution" "website" {
   }
 
   restrictions {
-    geo_restriction { restriction_type = "none" }
+    geo_restriction {
+      restriction_type = "none"
+    }
   }
 
   # Attaches the validated ACM certificate to enable HTTPS.
