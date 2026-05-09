@@ -58,7 +58,6 @@ resource "aws_s3_bucket_versioning" "website" {
   versioning_configuration {
     status = "Enabled"
   }
-  tags = local.common_tags
 }
 
 # Origin Access Control (OAC) is the AWS-recommended way to connect
