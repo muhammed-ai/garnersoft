@@ -32,12 +32,12 @@ jobs:
 
       - name: Sync frontend to S3
         run: |
-          aws s3 sync frontend/ s3://${{ secrets.S3_BUCKET_NAME }} \
+          aws s3 sync frontend/ s3://garnersoft.com \
             --delete \
             --cache-control "max-age=31536000,public" \
             --exclude "*.html"
 
-          aws s3 sync frontend/ s3://${{ secrets.S3_BUCKET_NAME }} \
+          aws s3 sync frontend/ s3://garnersoft.com \
             --delete \
             --cache-control "no-cache,no-store,must-revalidate" \
             --include "*.html"
