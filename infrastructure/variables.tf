@@ -28,6 +28,12 @@ variable "availability_zones" {
   default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
+variable "create_networking" {
+  description = "Set to false to skip NAT Gateways and Elastic IPs until backend workloads are needed. Saves ~$100/month when only running a static website."
+  type        = bool
+  default     = false
+}
+
 locals {
   common_tags = {
     Project     = "Garnersoft"

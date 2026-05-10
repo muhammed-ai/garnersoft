@@ -67,8 +67,9 @@ resource "aws_subnet" "private" {
 # Each NAT Gateway requires a static Elastic IP address so that outbound
 # traffic from private subnets always originates from a known, fixed IP.
 # This is useful for whitelisting Garnersoft's IP with third-party APIs.
+# Only created when create_networking is true.
 resource "aws_eip" "nat" {
-  count  = length(var.availability_zones)
+  count  = var.create_networking ? length(var.availability_zones) : 0
   domain = "vpc"
 
   tags = merge(local.common_tags, {
@@ -86,8 +87,9 @@ resource "aws_eip" "nat" {
 # One NAT Gateway per AZ ensures private subnet traffic stays within the
 # same AZ, avoiding cross-AZ data transfer charges and maintaining
 # availability if one AZ goes down.
+# Only created when create_networking is true — costs ~$100/month.
 resource "aws_nat_gateway" "main" {
-  count         = length(var.availability_zones)
+  count         = var.create_networking ? length(var.availability_zones) : 0
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
 
@@ -128,8 +130,9 @@ resource "aws_route_table_association" "public" {
 # in the same AZ. Keeping route tables per-AZ means private subnet traffic
 # never crosses AZ boundaries for outbound internet access, reducing latency
 # and data transfer costs.
+# Only created when create_networking is true.
 resource "aws_route_table" "private" {
-  count  = length(var.availability_zones)
+  count  = var.create_networking ? length(var.availability_zones) : 0
   vpc_id = aws_vpc.main.id
 
   route {
@@ -143,8 +146,9 @@ resource "aws_route_table" "private" {
 }
 
 # Associates each private subnet with its corresponding per-AZ route table.
+# Only created when create_networking is true.
 resource "aws_route_table_association" "private" {
-  count          = length(var.availability_zones)
+  count          = var.create_networking ? length(var.availability_zones) : 0
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private[count.index].id
 }
