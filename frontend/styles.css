@@ -1,16 +1,17 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #0f1b2d;
-  --navy2: #161f2e;
-  --orange: #ff9900;
-  --orange-dark: #e68a00;
-  --blue: #00a1c9;
-  --text: #d1d5db;
-  --text-muted: #8b9ab0;
-  --white: #ffffff;
-  --border: #243447;
-  --card: #1a2840;
+  --navy: #0d1b2a;
+  --navy2: #112236;
+  --orange: #f59e0b;
+  --orange-dark: #d97706;
+  --blue: #38bdf8;
+  --accent: #6366f1;
+  --text: #cbd5e1;
+  --text-muted: #64748b;
+  --white: #f8fafc;
+  --border: #1e3a5f;
+  --card: #0f2744;
 }
 
 html { scroll-behavior: smooth; }
@@ -30,7 +31,7 @@ header {
 }
 
 nav {
-  background: rgba(15, 27, 45, 0.97);
+  background: var(--navy2);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 5%;
@@ -195,7 +196,7 @@ h2.section-title {
   border-radius: 8px;
   padding: .8rem;
   display: flex; flex-direction: column; gap: .5rem;
-  background: rgba(255,255,255,.02);
+  background: var(--card);
   width: 320px;
 }
 
@@ -209,7 +210,7 @@ h2.section-title {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: .6rem;
-  background: rgba(0,161,201,.04);
+  background: var(--navy);
 }
 
 .k8s-plane-label {
@@ -235,19 +236,19 @@ h2.section-title {
 }
 
 .k8s-component.cp {
-  background: rgba(0,161,201,.15);
-  border: 1px solid rgba(0,161,201,.35);
+  background: var(--navy);
+  border: 1px solid var(--border);
   color: var(--blue);
 }
 
 .k8s-component.ingress {
-  background: rgba(255,153,0,.12);
-  border: 1px solid rgba(255,153,0,.35);
+  background: var(--navy);
+  border: 1px solid var(--border);
   color: var(--orange);
 }
 
 .k8s-component.ext {
-  background: rgba(255,255,255,.05);
+  background: var(--card);
   border: 1px solid var(--border);
   color: var(--text-muted);
 }
@@ -256,7 +257,7 @@ h2.section-title {
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: .4rem;
-  background: rgba(255,255,255,.03);
+  background: var(--card);
   display: flex; flex-direction: column; gap: .25rem; align-items: center;
 }
 
@@ -266,8 +267,8 @@ h2.section-title {
 }
 
 .k8s-pod {
-  background: rgba(255,153,0,.1);
-  border: 1px solid rgba(255,153,0,.25);
+  background: var(--navy);
+  border: 1px solid var(--border);
   color: var(--orange);
   border-radius: 3px;
   padding: .18rem .4rem;
@@ -292,18 +293,19 @@ h2.section-title {
 
 /* ── HERO ── */
 #hero {
-  background: linear-gradient(135deg, #0a1628 0%, #0f1b2d 60%, #0d2137 100%);
+  background: var(--navy);
   min-height: 88vh;
   display: flex; align-items: center; justify-content: space-between;
   gap: 3rem;
   padding: 80px 5%;
   position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
 }
 
 #hero::before {
   content: "";
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,161,201,.08) 0%, transparent 70%);
+  background: none;
   pointer-events: none;
 }
 
@@ -311,9 +313,9 @@ h2.section-title {
 
 .hero-badge {
   display: inline-flex; align-items: center; gap: .5rem;
-  background: rgba(255,153,0,.1); border: 1px solid rgba(255,153,0,.3);
+  background: var(--card); border: 1px solid var(--border);
   color: var(--orange); font-size: .8rem; font-weight: 600;
-  padding: .35rem .9rem; border-radius: 20px; margin-bottom: 1.5rem;
+  padding: .35rem .9rem; border-radius: 4px; margin-bottom: 1.5rem;
 }
 
 #hero h1 {
@@ -364,7 +366,8 @@ h2.section-title {
 
 .trust-icon {
   width: 36px; height: 36px; flex-shrink: 0;
-  background: rgba(255,153,0,.12);
+  background: var(--navy);
+  border: 1px solid var(--border);
   border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
@@ -463,7 +466,7 @@ h2.section-title {
 
 /* ── CTA BANNER ── */
 #cta-banner {
-  background: linear-gradient(135deg, #0d2137 0%, #0f1b2d 100%);
+  background: var(--navy2);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   text-align: center;
@@ -498,9 +501,9 @@ h2.section-title {
 
 .academy-badge {
   display: inline-block;
-  background: rgba(0,161,201,.1); border: 1px solid rgba(0,161,201,.3);
+  background: var(--card); border: 1px solid var(--border);
   color: var(--blue); font-size: .75rem; font-weight: 700;
-  padding: .3rem .8rem; border-radius: 20px; margin-bottom: .5rem;
+  padding: .3rem .8rem; border-radius: 4px; margin-bottom: .5rem;
   text-transform: uppercase; letter-spacing: .08em;
 }
 
@@ -519,7 +522,7 @@ h2.section-title {
 .about-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
 
 .tag {
-  background: rgba(255,153,0,.1); border: 1px solid rgba(255,153,0,.25);
+  background: var(--card); border: 1px solid var(--border);
   color: var(--orange); font-size: .78rem; font-weight: 600;
   padding: .3rem .8rem; border-radius: 4px;
 }
@@ -567,7 +570,7 @@ h2.section-title {
 
 /* ── FOOTER ── */
 footer {
-  background: #080f1a;
+  background: var(--navy2);
   border-top: 1px solid var(--border);
   padding: 2rem 5%;
   display: flex; align-items: center; justify-content: space-between;
@@ -609,7 +612,7 @@ footer p { font-size: .82rem; color: var(--text-muted); }
   .nav-links.open {
     display: flex; flex-direction: column; align-items: flex-start;
     position: absolute; top: 60px; left: 0; right: 0;
-    background: rgba(15,27,45,.98); border-bottom: 1px solid var(--border);
+    background: var(--navy2); border-bottom: 1px solid var(--border);
     padding: 1rem 5%; gap: 1rem;
   }
   .hamburger { display: flex; }
