@@ -1,6 +1,7 @@
 import json
 import urllib.request
 import urllib.error
+import base64
 import boto3
 import os
 
@@ -11,18 +12,29 @@ def get_secret():
     return secret["brevo_api_key"]
 
 def handler(event, context):
+    print("Event:", json.dumps(event))
+
     headers = {
-        "Access-Control-Allow-Origin": "https://garnersoft.com",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
     }
 
     # Handle CORS preflight
-    if event.get("httpMethod") == "OPTIONS":
+    method = event.get("httpMethod") or event.get("requestContext", {}).get("http", {}).get("method", "")
+    if method == "OPTIONS":
         return {"statusCode": 200, "headers": headers, "body": ""}
 
     try:
-        body = json.loads(event.get("body", "{}"))
+        # Handle base64-encoded body (API Gateway may encode it)
+        raw_body = event.get("body", "{}")
+        if event.get("isBase64Encoded", False):
+            raw_body = base64.b64decode(raw_body).decode("utf-8")
+
+        if not raw_body:
+            raw_body = "{}"
+
+        body = json.loads(raw_body)
         email = body.get("email", "").strip().lower()
 
         if not email or "@" not in email:
@@ -34,7 +46,6 @@ def handler(event, context):
 
         api_key = get_secret()
 
-        # Add contact to Brevo
         payload = json.dumps({
             "email": email,
             "listIds": [int(os.environ["BREVO_LIST_ID"])],
@@ -56,9 +67,9 @@ def handler(event, context):
             urllib.request.urlopen(req)
         except urllib.error.HTTPError as e:
             error_body = e.read().decode()
-            # 400 with "Contact already exist" is fine
+            print(f"Brevo error {e.code}: {error_body}")
             if e.code == 400 and "already exist" in error_body.lower():
-                pass
+                pass  # already subscribed is fine
             else:
                 raise
 
