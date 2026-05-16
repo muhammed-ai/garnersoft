@@ -34,6 +34,12 @@ variable "create_networking" {
   default     = false
 }
 
+variable "brevo_list_id" {
+  description = "Brevo contact list ID to add waitlist subscribers to. Find it in Brevo → Contacts → Lists."
+  type        = number
+  default     = 2
+}
+
 locals {
   common_tags = {
     Project     = "Garnersoft"

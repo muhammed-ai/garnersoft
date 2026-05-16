@@ -40,6 +40,11 @@ output "public_security_group_id" {
   value       = aws_security_group.public.id
 }
 
+output "waitlist_api_url" {
+  description = "API Gateway URL for the waitlist form — paste this into index.html"
+  value       = "${aws_apigatewayv2_stage.waitlist.invoke_url}/waitlist"
+}
+
 output "private_security_group_id" {
   description = "Security group ID for private resources"
   value       = aws_security_group.private.id

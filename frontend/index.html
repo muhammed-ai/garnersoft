@@ -100,64 +100,29 @@
     </div>
   </div>
 
-  <!-- K8s Architecture Diagram -->
-  <div class="hero-diagram fade-in" aria-label="High-level Kubernetes architecture diagram" role="img">
-    <div class="k8s-diagram">
-
-      <!-- Cloud boundary -->
-      <div class="k8s-cloud-label">Cloud Provider (AWS / Azure / GCP)</div>
-
-      <!-- Cluster boundary -->
-      <div class="k8s-cluster">
-        <div class="k8s-cluster-label">Kubernetes Cluster</div>
-
-        <!-- Control Plane -->
-        <div class="k8s-plane">
-          <div class="k8s-plane-label">Control Plane</div>
-          <div class="k8s-plane-nodes">
-            <div class="k8s-component cp">API Server</div>
-            <div class="k8s-component cp">Scheduler</div>
-            <div class="k8s-component cp">etcd</div>
-            <div class="k8s-component cp">Controller</div>
-          </div>
-        </div>
-
-        <!-- Arrow -->
-        <div class="k8s-arrow" aria-hidden="true">↕</div>
-
-        <!-- Worker Nodes -->
-        <div class="k8s-plane">
-          <div class="k8s-plane-label">Worker Nodes</div>
-          <div class="k8s-workers">
-            <div class="k8s-node">
-              <div class="k8s-node-label">Node 1</div>
-              <div class="k8s-pod">Pod</div>
-              <div class="k8s-pod">Pod</div>
-              <div class="k8s-node-agent">kubelet · kube-proxy</div>
-            </div>
-            <div class="k8s-node">
-              <div class="k8s-node-label">Node 2</div>
-              <div class="k8s-pod">Pod</div>
-              <div class="k8s-pod">Pod</div>
-              <div class="k8s-node-agent">kubelet · kube-proxy</div>
-            </div>
-            <div class="k8s-node">
-              <div class="k8s-node-label">Node 3</div>
-              <div class="k8s-pod">Pod</div>
-              <div class="k8s-pod">Pod</div>
-              <div class="k8s-node-agent">kubelet · kube-proxy</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- External traffic -->
-      <div class="k8s-ingress">
-        <div class="k8s-component ingress">Ingress / Load Balancer</div>
-        <div class="k8s-arrow" aria-hidden="true">↑</div>
-        <div class="k8s-component ext">Internet Traffic</div>
-      </div>
-
+  <!-- Terminal block -->
+  <div class="hero-terminal fade-in" aria-hidden="true">
+    <div class="terminal-header">
+      <span class="terminal-dot dot-red"></span>
+      <span class="terminal-dot dot-yellow"></span>
+      <span class="terminal-dot dot-green"></span>
+      <span class="terminal-title">garnersoft — terraform</span>
+    </div>
+    <div class="terminal-body">
+      <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">terraform init</span></div>
+      <div class="t-line t-out">✓ Initializing provider plugins...</div>
+      <div class="t-line t-out">✓ Terraform has been successfully initialized!</div>
+      <div class="t-line">&nbsp;</div>
+      <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">terraform plan</span></div>
+      <div class="t-line t-out">+ aws_s3_bucket.website</div>
+      <div class="t-line t-out">+ aws_cloudfront_distribution.website</div>
+      <div class="t-line t-out">+ aws_acm_certificate.website</div>
+      <div class="t-line t-out">+ aws_route53_record.apex</div>
+      <div class="t-line t-success">Plan: 31 to add, 0 to change, 0 to destroy.</div>
+      <div class="t-line">&nbsp;</div>
+      <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">terraform apply <span class="t-flag">--auto-approve</span></span></div>
+      <div class="t-line t-success">✓ Apply complete! Resources: 31 added.</div>
+      <div class="t-cursor">&#9646;</div>
     </div>
   </div>
 </section>
@@ -278,9 +243,8 @@
       <p>Step-by-step, hands-on training designed to help beginners break into cloud and DevOps using real projects—not just theory.</p>
       <form class="waitlist-form" id="waitlist-form">
         <label for="waitlist-email" class="sr-only">Email address for waitlist</label>
-        <input id="waitlist-email" type="email" placeholder="your@email.com" required />
-        <!-- honeypot -->
-        <input type="text" name="_gotcha" tabindex="-1" aria-hidden="true" style="display:none" />
+        <input id="waitlist-email" type="email" name="EMAIL" placeholder="your@email.com" required />
+        <input type="text" name="b_REPLACE_U_REPLACE_ID" tabindex="-1" style="display:none" />
         <button type="submit" class="btn-primary" style="white-space:nowrap;">Join the Waitlist</button>
       </form>
     </div>
@@ -421,11 +385,25 @@
   scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── Waitlist form
-  document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+  const WAITLIST_API = 'REPLACE_WITH_API_GATEWAY_URL';
+  document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('button');
-    btn.textContent = "\u2713 You're on the list!";
+    const email = document.getElementById('waitlist-email').value.trim();
+    btn.textContent = 'Adding you...';
     btn.disabled = true;
+    try {
+      const res = await fetch(WAITLIST_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      btn.textContent = res.ok ? "\u2713 You're on the list!" : data.message || 'Try again.';
+      if (res.ok) this.reset();
+    } catch {
+      btn.textContent = 'Something went wrong.';
+    }
   });
 </script>
 </body>
