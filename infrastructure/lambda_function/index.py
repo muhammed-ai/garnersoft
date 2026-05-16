@@ -8,8 +8,14 @@ import os
 def get_secret():
     client = boto3.client("secretsmanager", region_name=os.environ.get("SECRET_REGION", "us-east-1"))
     response = client.get_secret_value(SecretId=os.environ["SECRET_NAME"])
-    secret = json.loads(response["SecretString"])
-    return secret["brevo_api_key"]
+    secret_string = response["SecretString"]
+    # Handle both plain string and JSON-wrapped secret
+    try:
+        secret = json.loads(secret_string)
+        return secret["brevo_api_key"]
+    except (json.JSONDecodeError, KeyError):
+        # Secret is stored as plain API key string
+        return secret_string.strip()
 
 def handler(event, context):
     print("Event:", json.dumps(event))
