@@ -385,7 +385,7 @@
   scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── Waitlist form
-  const WAITLIST_API = 'REPLACE_WITH_API_GATEWAY_URL';
+  const WAITLIST_API = 'https://iaou20sxte.execute-api.us-east-1.amazonaws.com/waitlist';
   document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('button');
